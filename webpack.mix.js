@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,7 +11,13 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
+mix.js("resources/js/app.js", "public/js")
+    .js("resources/js/book.js", "public/js")
+    .js("resources/js/author.js", "public/js")
+    .js("resources/js/editorial.js", "public/js")
+    .js("resources/js/home.js", "public/js")
+    .js("resources/js/helper.js", "public/js")
+    .postCss("resources/css/app.css", "public/css", [
         //
-    ]);
+    ])
+    .version();;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/book', function () {
+    return view('create');
+})->name('view.book');
+
+Route::get('/book/{id}',[BookController::class,'edit'])->name('view.edit');

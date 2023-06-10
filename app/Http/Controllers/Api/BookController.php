@@ -5,28 +5,36 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
 use App\Models\Book;
-use App\Models\Editorial;
-use App\Traits\ApiResponser;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 
 class BookController extends Controller
 {
-
-    use ApiResponser;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
+            $query = Book::select('*');
 
-            $book = Book::paginate(5);
+            if ($request->has('author_id')) {
 
-            return  response($book, 200)->header('Content-Type', 'application/json');
+                $query->where('author_id', $request->author_id);
+            }
+            
+            if ($request->has('editorial_id')) {
+                
+                $query->where('editorial_id', $request->editorial_id);
+            }
+
+            $books = $query->with('author')->with('editorial')->paginate(5);
+
+            return  response($books, 200)->header('Content-Type', 'application/json');
         } catch (Exception $th) {
             return $this->errorMessage([
                 "Message" => $th->getMessage()
@@ -83,7 +91,20 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+
+            $book = Book::with('author')->with('editorial')->find($id);
+
+            if (!$book) {
+                $book = [];
+            }
+
+            return $this->successResponse($book);
+        } catch (Exception $th) {
+            return $this->errorMessage([
+                "Message" => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**

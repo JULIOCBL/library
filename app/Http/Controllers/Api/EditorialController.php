@@ -6,14 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EditorialRequest;
 use App\Models\Book;
 use App\Models\Editorial;
-use App\Traits\ApiResponser;
 use Exception;
-use Illuminate\Http\Request;
 
 class EditorialController extends Controller
 {
 
-    use ApiResponser;
     /**
      * Display a listing of the resource.
      *

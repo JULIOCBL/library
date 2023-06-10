@@ -1,0 +1,1 @@
+window.create=function(){fetch(url()+"/api/v1/books",{headers:{"Content-Type":"application/json",Accept:"application/json, ","X-CSRF-TOKEN":csrf_token()},method:"POST",body:JSON.stringify({lang})}).then((function(n){return n.json()})).then((function(n){console.log(n)})).catch((function(n){console.log(n)}))};

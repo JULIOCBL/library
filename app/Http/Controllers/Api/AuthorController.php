@@ -6,13 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorRequest;
 use App\Models\Author;
 use App\Models\Book;
-use App\Traits\ApiResponser;
 use Exception;
-use Illuminate\Http\Request;
 
 class AuthorController extends Controller
-{
-    use ApiResponser;
+{   
     /**
      * Display a listing of the resource.
      *
